@@ -1,0 +1,108 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Apache Maven Wrapper startup batch script, version 3.3.2
+# ----------------------------------------------------------------------------
+
+set -e
+
+# OS specific support.
+cygwin=false
+darwin=false
+mingw=false
+case "$(uname)" in
+  CYGWIN*) cygwin=true ;;
+  Darwin*) darwin=true ;;
+  MINGW*) mingw=true ;;
+esac
+
+## Path to the script being executed
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+## Path to the project home (the directory containing this script)
+PROJECT_HOME="$SCRIPT_DIR"
+
+## Path to the .mvn directory
+MAVEN_PROJECTBASEDIR="${MAVEN_BASEDIR:-$PROJECT_HOME}"
+
+## Find the Maven wrapper properties file
+WRAPPER_PROPERTIES="$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.properties"
+
+## Define the user home directory
+if [ -z "$MAVEN_USER_HOME" ]; then
+  MAVEN_USER_HOME="$HOME/.m2"
+fi
+
+## Read Maven distribution URL from properties
+if [ -f "$WRAPPER_PROPERTIES" ]; then
+  distributionUrl=$(grep '^distributionUrl' "$WRAPPER_PROPERTIES" | sed 's/distributionUrl=//')
+  wrapperUrl=$(grep '^wrapperUrl' "$WRAPPER_PROPERTIES" | sed 's/wrapperUrl=//')
+fi
+
+## Define the distribution directory
+distributionUrlName=$(basename "$distributionUrl")
+distributionVersion=$(echo "$distributionUrlName" | sed 's/apache-maven-\(.*\)-bin\.zip/\1/')
+DISTRIBUTION_DIR="$MAVEN_USER_HOME/wrapper/dists/apache-maven-$distributionVersion-bin"
+MAVEN_HOME="$DISTRIBUTION_DIR/apache-maven-$distributionVersion"
+
+WRAPPER_JAR="$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar"
+WRAPPER_LAUNCHER="org.apache.maven.wrapper.MavenWrapperMain"
+
+## Download the wrapper JAR if not present
+if [ ! -f "$WRAPPER_JAR" ]; then
+  echo "Downloading Maven Wrapper JAR from: $wrapperUrl"
+  if command -v curl > /dev/null 2>&1; then
+    curl -fsSL -o "$WRAPPER_JAR" "$wrapperUrl"
+  elif command -v wget > /dev/null 2>&1; then
+    wget -q -O "$WRAPPER_JAR" "$wrapperUrl"
+  else
+    echo "ERROR: Neither 'curl' nor 'wget' is available. Cannot download maven-wrapper.jar." >&2
+    exit 1
+  fi
+fi
+
+## Find java executable
+if [ -n "$JAVA_HOME" ]; then
+  JAVA_CMD="$JAVA_HOME/bin/java"
+  if [ ! -x "$JAVA_CMD" ]; then
+    echo "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME" >&2
+    exit 1
+  fi
+else
+  JAVA_CMD="java"
+  if ! command -v java > /dev/null 2>&1; then
+    echo "ERROR: JAVA_HOME is not set and 'java' could not be found in PATH." >&2
+    echo "Please install Java 21+ and set JAVA_HOME." >&2
+    exit 1
+  fi
+fi
+
+## Construct classpath
+CLASSPATH="$WRAPPER_JAR"
+
+## Execute the wrapper
+exec "$JAVA_CMD" \
+  $JAVA_OPTS \
+  $MAVEN_OPTS \
+  -classpath "$CLASSPATH" \
+  "-Dmaven.home=$MAVEN_HOME" \
+  "-Dmaven.multiModuleProjectDirectory=$MAVEN_PROJECTBASEDIR" \
+  $WRAPPER_LAUNCHER "$@"

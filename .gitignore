@@ -1,0 +1,33 @@
+# ===== Backend (Java / Maven) =====
+backend/target/
+backend/*.class
+# Note: mvnw, mvnw.cmd, and .mvn/wrapper/maven-wrapper.properties MUST be committed.
+# Only ignore the downloaded wrapper JAR binary (it is fetched on first run).
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# ===== Frontend (Node / Vite) =====
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# ===== IDE =====
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Environment =====
+.env
+*.env.local
+
+# ===== Explicit Allows =====
+!/backend/Dockerfile
+!/README.md
+!/assets/
+!/AGENTS.md
+!/DESIGN.md
