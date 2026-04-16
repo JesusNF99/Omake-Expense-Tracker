@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM maven:3.9.6-eclipse-temurin-17 AS builder
+FROM maven:3.9.6-eclipse-temurin-21 AS builder
 WORKDIR /app
 
 # Copy the pom.xml and download dependencies to optimize caching
@@ -15,7 +15,7 @@ RUN mvn clean package -DskipTests
 RUN find target -name "*.jar" ! -name "*-plain.jar" ! -name "*-javadoc.jar" ! -name "*-sources.jar" -exec cp {} target/app.jar \;
 
 # Stage 2: Prepare the runtime environment
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 
 # Security Hardening: Create a non-root user and group
 RUN addgroup -S spring && adduser -S spring -G spring
