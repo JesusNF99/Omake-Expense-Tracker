@@ -38,7 +38,7 @@ const NewTransaction = () => {
         transaction_date: formData.date
       };
 
-      await axios.post('http://localhost:8080/api/transactions', payload, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/transactions`, payload, {
         headers: {
           Authorization: `Bearer ${token}`
         }

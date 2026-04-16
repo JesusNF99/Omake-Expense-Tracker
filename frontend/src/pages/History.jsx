@@ -20,7 +20,7 @@ const History = () => {
           }
         };
 
-        const res = await axios.get('http://localhost:8080/api/transactions', config);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/transactions`, config);
         const txData = res.data.content ? res.data.content : (Array.isArray(res.data) ? res.data : []);
         setTransactions(txData);
         setError(null);

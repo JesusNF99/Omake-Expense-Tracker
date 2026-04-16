@@ -30,8 +30,8 @@ const Dashboard = () => {
         };
 
         const [txRes, summaryRes] = await Promise.all([
-          axios.get('http://localhost:8080/api/transactions', config),
-          axios.get('http://localhost:8080/api/transactions/summary', config)
+          axios.get(`${import.meta.env.VITE_API_URL}/transactions`, config),
+          axios.get(`${import.meta.env.VITE_API_URL}/transactions/summary`, config)
         ]);
 
         const txData = txRes.data.content ? txRes.data.content : (Array.isArray(txRes.data) ? txRes.data : []);
@@ -124,14 +124,14 @@ const Dashboard = () => {
     if (!transactionToDelete) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8080/api/transactions/${transactionToDelete.id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/transactions/${transactionToDelete.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Updating UI optimistically
       setTransactions(prev => prev.filter(t => t.id !== transactionToDelete.id));
       
       // Refetch summary since it's easier to keep data consistent
-      const summaryRes = await axios.get('http://localhost:8080/api/transactions/summary', {
+      const summaryRes = await axios.get(`${import.meta.env.VITE_API_URL}/transactions/summary`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSummary(summaryRes.data.byCategory || []);

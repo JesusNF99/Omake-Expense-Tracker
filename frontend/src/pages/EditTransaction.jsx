@@ -25,7 +25,7 @@ const EditTransaction = () => {
         // Fetch all transactions and filter, since by design there might not be a single GET route yet in API spec
         // Wait, API spec mentioned getting transactions.
         // Let's assume hitting /api/transactions and filtering for ID, or we fetch just that one.
-        const res = await axios.get('http://localhost:8080/api/transactions', {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/transactions`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -76,7 +76,7 @@ const EditTransaction = () => {
         transaction_date: formData.date
       };
 
-      await axios.put(`http://localhost:8080/api/transactions/${id}`, payload, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/transactions/${id}`, payload, {
         headers: {
           Authorization: `Bearer ${token}`
         }
