@@ -29,5 +29,8 @@ Thumbs.db
 !/backend/Dockerfile
 !/README.md
 !/assets/
-!/AGENTS.md
-!/DESIGN.md
+
+# ===== Internal / Docs =====
+/AGENTS.md
+/DESIGN.md
+/.skills/
