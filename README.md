@@ -53,11 +53,11 @@ Ensure you have the following installed on your machine:
    ```bash
    cd backend
    ```
-2. Set up your environment variables. You will need a Neon DB connection string and a JWT secret for authentication. You can set these in your `application.properties` or as environment variables:
-   - `SPRING_DATASOURCE_URL` (Your Neon PostgreSQL DB URL)
+2. Set up your environment variables. You will need a standard PostgreSQL database running (locally or in the cloud) and a JWT secret for authentication. You can set these in your `application.properties` or via a `.env` file:
+   - `SPRING_DATASOURCE_URL` (Your PostgreSQL connection URL, e.g., `jdbc:postgresql://localhost:5432/omake_db`)
    - `SPRING_DATASOURCE_USERNAME` (Your DB Username)
    - `SPRING_DATASOURCE_PASSWORD` (Your DB Password)
-   - `JWT_SECRET` (A strong secret string)
+   - `JWT_SECRET` (A strong, random secret string for token signing)
 3. Run the Spring Boot backend server:
    ```bash
    ./mvnw spring-boot:run
