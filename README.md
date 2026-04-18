@@ -1,5 +1,7 @@
 # Omake - Premium Expense Tracker
 
+**🚀 Live Demo: https://omake-expense-tracker.vercel.app/**
+
 Omake is a secure, full-stack financial dashboard designed to provide a visually stunning, insightful, and comprehensive experience for tracking your personal finances.
 
 ![Omake Dashboard](assets/dashboard.png)
